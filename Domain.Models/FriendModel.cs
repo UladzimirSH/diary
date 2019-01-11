@@ -1,7 +1,8 @@
 ﻿using System;
+using Domain.Models.Abstractions;
 
 namespace Domain.Models {
-    public class FriendModel {
+    public class FriendModel : ModelBase {
 
         public string Name {
             get; set;

@@ -7,7 +7,7 @@ namespace Repository.Contexts {
             : base("DbConnection") {
         }
 
-        public DbSet<Friend> Users {
+        public DbSet<Friend> Friend {
             get; set;
         }
     }

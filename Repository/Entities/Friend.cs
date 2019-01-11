@@ -1,7 +1,8 @@
 ﻿using System;
+using Repository.Entities.Abstract;
 
 namespace Repository.Entities {
-    public class Friend {
+    public class Friend: EntityBase {
 
         public int FriendId {
             get;
