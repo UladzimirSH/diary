@@ -5,8 +5,6 @@ using Repository.Entities.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Linq.Expressions;
 
 namespace Repository.Repositories.Abstract {
     public class RepositoryBase<TModel, TEntity> : IRepository<TModel>
@@ -21,7 +19,7 @@ namespace Repository.Repositories.Abstract {
             _mapper = mapper;
         }
 
-        public void Add(TModel model) {
+        public virtual void Add(TModel model) {
             var entity = _mapper.Map<TEntity>(model);
             _dbContext.Set(typeof(TEntity)).Add(entity);
         }
@@ -38,8 +36,10 @@ namespace Repository.Repositories.Abstract {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<TModel> GetAll() {
+        public virtual IEnumerable<TModel> GetAll()
+        {
             throw new NotImplementedException();
+           // var t = _dbContext.Set<TEntity>();
         }
 
         public void Remove(TModel entit) {

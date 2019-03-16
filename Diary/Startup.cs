@@ -1,8 +1,17 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AutoMapper;
+using Domain.Services.Services;
+using Domain.Services.Services.Abstract;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Reporting;
+using Reporting.Abstractions;
+using Repository;
+using Repository.Repositories;
+using Repository.Repositories.Abstract;
+using SmsNotificator.Services.Abstract;
 
 namespace Diary {
     public class Startup {
@@ -17,6 +26,20 @@ namespace Diary {
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddScoped<IFriendService, FriendService>();
+            services.AddScoped<IFriendRepository, FriendRepository>();
+
+            services.AddScoped<ISmsNotificator, SmsNotificator.SmsNotificator>();
+            services.AddSingleton<IDailyBirthdayNotificator, DailyBirthdayNotificator>();
+
+            // Auto Mapper Configurations
+            var mappingConfig = new MapperConfiguration(mc => {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

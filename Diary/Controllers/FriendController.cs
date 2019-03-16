@@ -5,7 +5,7 @@ using Domain.Services.Services.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Diary.Controllers {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class FriendController : ControllerBase
     {
@@ -30,8 +30,13 @@ namespace Diary.Controllers {
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] FriendModel friend) {
-            _friendService.AddFriend(friend);
+        public void Post() {
+
+            _friendService.AddFriend(new FriendModel
+            {
+                DateOfBirth = DateTime.Now,
+                Name = "TestName"
+            });
         }
 
         // PUT api/values/5

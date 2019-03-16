@@ -58,6 +58,7 @@
     <Compile Include="Entities\Abstract\EntityBase.cs" />
     <Compile Include="Entities\Abstract\IEntity.cs" />
     <Compile Include="Entities\Friend.cs" />
+    <Compile Include="MappingProfile.cs" />
     <Compile Include="Repositories\Abstract\IFriendRepository.cs" />
     <Compile Include="Repositories\Abstract\IRepository.cs" />
     <Compile Include="Repositories\Abstract\RepositoryBase.cs" />

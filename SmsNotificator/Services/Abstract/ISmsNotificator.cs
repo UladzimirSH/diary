@@ -1,8 +1,5 @@
-﻿using System;
-namespace SmsNotificator
-{
-    public interface ISmsNotificator
-    {
+﻿namespace SmsNotificator.Services.Abstract {
+    public interface ISmsNotificator {
         void NotifyByPhoneNumber(string phoneNumber, string message);
     }
 }
