@@ -1,6 +1,9 @@
-﻿using Domain.Models;
+﻿using System.Collections.Generic;
+using Domain.Models;
 
 namespace Repository.Repositories.Abstract {
-    public interface IFriendRepository: IRepository<FriendModel> {
+    public interface IFriendRepository {
+        void Add(FriendModel friendModel);
+        IEnumerable<FriendModel> GetAll();
     }
 }

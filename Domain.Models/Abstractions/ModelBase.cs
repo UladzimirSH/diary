@@ -1,4 +1,8 @@
 ﻿namespace Domain.Models.Abstractions {
-    public class ModelBase: IModel {
+    public abstract class ModelBase : IModel {
+
+        public int Id {
+            get; set;
+        }
     }
 }

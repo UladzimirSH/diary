@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Domain.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Reporting.Abstractions;
 
 namespace Diary.Controllers {

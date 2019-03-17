@@ -16,6 +16,7 @@ namespace Diary.Controllers {
         {
             _friendService = friendService;
         }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<FriendModel>> Get() {
@@ -40,13 +41,8 @@ namespace Diary.Controllers {
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put([FromBody] FriendModel friend) {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id) {
+        [HttpPut()]
+        public void Put() {
         }
     }
 }

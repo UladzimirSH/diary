@@ -25,7 +25,8 @@ namespace Domain.Services.Services
         public void AddFriend(FriendModel friend)
         {
             _friendRepository.Add(friend);
-            _friendRepository.Commit();
         }
+
+
     }
 }
