@@ -19,6 +19,7 @@
     <ProjectReference Include="..\Domain.Models\Domain.Models.csproj" />
     <ProjectReference Include="..\Domain.Services\Domain.Services.csproj" />
     <ProjectReference Include="..\Reporting\Reporting.csproj" />
+    <ProjectReference Include="..\Repository\Repository.csproj" />
     <ProjectReference Include="..\SmsNotificator\SmsNotificator.csproj" />
   </ItemGroup>
 
