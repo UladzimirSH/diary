@@ -22,6 +22,10 @@ namespace Domain.Services.Services
             return friends.Where(f => f.DateOfBirth.Date == dateTime.Date).ToList();
         }
 
+        public IReadOnlyCollection<FriendModel> GetAll() {
+            return _friendRepository.GetAll().ToList();
+        }
+
         public void AddFriend(FriendModel friend)
         {
             _friendRepository.Add(friend);

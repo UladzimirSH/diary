@@ -20,15 +20,5 @@ namespace Diary.Controllers {
         public void StopBirthdayNotifications() {
             _birthdayNotificator.Stop();
         }
-
-        [HttpGet]
-        public ActionResult<string> Get() {
-            return Ok("ok!");
-        }
-
-        [HttpGet("Status")]
-        public ActionResult<string> GetStatus() {
-            return Ok("ok status!");
-        }
     }
 }

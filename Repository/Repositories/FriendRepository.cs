@@ -1,54 +1,45 @@
-﻿using System;
-using Domain.Models;
+﻿using Domain.Models;
 using Repository.Repositories.Abstract;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using Repository.Constants;
 
 namespace Repository.Repositories {
     public class FriendRepository : IFriendRepository {
 
         public void Add(FriendModel model) {
-            try {
-                using (var sqlConnection = new SqlConnection(SqlCommandConstants.ConnectionString)) {
-                    sqlConnection.Open();
-                    using (var sqlCommand = new SqlCommand(
-                        SqlCommandConstants.AddFriendQuery(model.Name, model.DateOfBirth, model.DateOfWedding), sqlConnection)) {
-                        sqlCommand.ExecuteNonQuery();
-                    }
+            using (var mySqlConnection = new MySqlConnection(Queries.ConnectionString)) {
+                mySqlConnection.Open();
+                string mySqlQuery = Queries.AddFriendQuery(model.Name, model.DateOfBirth, model.DateOfWedding);
+                using (var mySqlCommand = new MySqlCommand(mySqlQuery, mySqlConnection)) {
+                    mySqlCommand.ExecuteNonQuery();
                 }
-
-            } catch (Exception e) {
             }
         }
 
         public IEnumerable<FriendModel> GetAll() {
-            try {
-                using (var sqlConnection = new SqlConnection(SqlCommandConstants.ConnectionString)) {
-                    sqlConnection.Open();
-                    using (var sqlCommand = new SqlCommand(SqlCommandConstants.SelectAllFriendsQuery, sqlConnection)) {
-                        SqlDataReader myReader = null;
+            List<FriendModel> friends = new List<FriendModel>();
 
-                        myReader = sqlCommand.ExecuteReader();
-                        List<FriendModel> friends = new List<FriendModel>();
-                        while (myReader.Read()) {
-                            FriendModel friend = new FriendModel() {
-                                Id = Int32.Parse(myReader["FriendId"].ToString()),
-                                Name = myReader["FriendName"].ToString(),
-                                DateOfBirth = DateTime.Parse(myReader["DateOfBirth"].ToString()),
-                                DateOfWedding = DateTime.Parse(myReader["DateOfWedding"].ToString())
-                            };
-                            friends.Add(friend);
-                        }
+            using (var mySqlConnection = new MySqlConnection(Queries.ConnectionString)) {
+                mySqlConnection.Open();
+                using (var mySqlCommand = new MySqlCommand(Queries.SelectAllFriendsQuery, mySqlConnection)) {
+                    MySqlDataReader mySqlReader = null;
 
-                        return friends;
+                    mySqlReader = mySqlCommand.ExecuteReader();
+
+                    while (mySqlReader.Read()) {
+                        FriendModel friend = new FriendModel() {
+                            Id = mySqlReader.GetInt32(ColumnNames.Friend_FriendId),
+                            Name = mySqlReader.GetString(ColumnNames.Friend_FriendName),
+                            DateOfBirth = mySqlReader.GetDateTime(ColumnNames.Friend_DateOfBirth),
+                            DateOfWedding = mySqlReader.GetDateTime(ColumnNames.Friend_DateOfWedding)
+                        };
+                        friends.Add(friend);
                     }
                 }
-            } catch (Exception e) {
-
             }
 
-            return new List<FriendModel>();
+            return friends;
         }
     }
 }
