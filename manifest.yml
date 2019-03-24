@@ -1,0 +1,7 @@
+---
+applications:
+- name: DIARY
+  memory: 1024M
+  instances: 1
+buildpacks: 
+      - staticfile_buildpack 
