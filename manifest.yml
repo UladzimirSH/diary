@@ -3,5 +3,7 @@ applications:
 - name: DIARY
   memory: 1024M
   instances: 1
+  health-check-type: http
+  health-check-http-endpoint: /healthcheck
 buildpacks: 
       - staticfile_buildpack 
